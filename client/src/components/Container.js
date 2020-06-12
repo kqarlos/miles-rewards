@@ -4,7 +4,7 @@ function Container(props) {
 
     return (
 
-        <div className="container my-4">
+        <div className="container my-4 border-right">
             {props.children}
         </div>
     );
