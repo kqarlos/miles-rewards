@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import Container from '../components/Container'
-import RewardRow from '../components/RewardRow'
+import Container from '../components/Container';
+import RewardRow from '../components/RewardRow';
+import { useStoreContext } from "../utils/GlobalState";
 
 
 function Homepage() {
 
+    const [state, dispatch] = useStoreContext();
+
     useEffect(() => {
         console.log("Loaded Homepage");
+        console.log("State", state.rewards);
     }, []);
 
     return (
@@ -43,15 +47,15 @@ function Homepage() {
                 </div>
             </div>
 
-            <RewardRow reward="R1" categories={["C1", "C2"]} />
+            <RewardRow reward="R1" categories={state.rewards["R1"]} />
 
-            <RewardRow reward="R2" categories={["C1", "C3"]} />
+            <RewardRow reward="R2" categories={state.rewards["R2"]} />
 
-            <RewardRow reward="R3" categories={["C5"]} />
+            <RewardRow reward="R3" categories={state.rewards["R3"]} />
 
-            <RewardRow reward="R4" categories={["C4"]} />
+            <RewardRow reward="R4" categories={state.rewards["R4"]} />
 
-            <RewardRow reward="R5" categories={["C3"]} />
+            <RewardRow reward="R5" categories={state.rewards["R5"]} />
 
 
         </Container>
