@@ -10,15 +10,20 @@ const { Provider } = StoreContext;
 const reducer = (state, action) => {
     switch (action.type) {
         case ADD_TO_CATEGORY:
+            console.log("STATE!! ADDING ", action.reward, " TO CATEGORY ", action.category);
+            var rewards2 = state.rewards;
+            var categories = rewards2[action.reward];
+            if (!categories.includes(action.category)) {
+                rewards2[action.reward].push(action.category);
+            }
             return {
                 ...state,
-                rewards: action.rewards,
+                rewards: rewards2,
             };
         case REMOVE_FROM_CATEGORY:
             console.log("STATE!! REMOVING ", action.reward, " FROM CATEGORY ", action.category);
-            // console.log("Categories: ", state.rewards[action.reward]);
             var rewards2 = state.rewards;
-            rewards2[action.reward] = state.rewards[action.reward].filter(cat => cat != action.category);
+            rewards2[action.reward] = state.rewards[action.reward].filter(cat => cat !== action.category);
             console.log(state.rewards);
             return {
                 ...state,
@@ -33,11 +38,11 @@ const reducer = (state, action) => {
 const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useReducer(reducer, {
         rewards: {
-            "R1": ["C1", "C2"],
-            "R2": ["C1", "C3"],
-            "R3": ["C5"],
-            "R4": ["C4"],
-            "R5": ["C3"]
+            "R1": [],
+            "R2": [],
+            "R3": [],
+            "R4": [],
+            "R5": []
         }
     });
     return <Provider value={[state, dispatch]} {...props} />;

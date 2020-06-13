@@ -1,7 +1,7 @@
 import React from 'react';
 import Reward from "./Reward";
 import { useStoreContext } from "../utils/GlobalState";
-import { REMOVE_FROM_CATEGORY } from '../utils/actions';
+import { REMOVE_FROM_CATEGORY, ADD_TO_CATEGORY } from '../utils/actions';
 
 function RewardRow(props) {
 
@@ -11,16 +11,19 @@ function RewardRow(props) {
 
     function click(e) {
         e.preventDefault();
-        // console.log("Clicked!");
-        // console.log("Reward", props.reward);
-        // console.log("Category", e.target.dataset.category);
+        e.stopPropagation();
+        console.log("Clicked!");
+        dispatch({
+            type: ADD_TO_CATEGORY,
+            reward: props.reward,
+            category: e.target.dataset.category
+        });
     }
 
     function del(e) {
         e.preventDefault();
+        e.stopPropagation();
         console.log("Delete!");
-        // console.log("Reward", props.reward);
-        // console.log("Category", e.target.dataset.category);
         dispatch({
             type: REMOVE_FROM_CATEGORY,
             reward: props.reward,
