@@ -7,6 +7,14 @@ function RewardRow(props) {
 
     function click(e) {
         e.preventDefault();
+        console.log("Clicked!");
+        console.log("Reward", props.reward);
+        console.log("Category", e.target.dataset.category);
+    }
+    
+    function del(e) {
+        e.preventDefault();
+        console.log("Delete!");
         console.log("Reward", props.reward);
         console.log("Category", e.target.dataset.category);
     }
@@ -23,7 +31,7 @@ function RewardRow(props) {
                 {
                     categories.map((cat, index) => {
                         if (cat === "C1") {
-                            return <Reward key={index} category="C1" reward={props.reward} />
+                            return <Reward key={index} category="C1" del={del} reward={props.reward} />
                         }
 
                     })
@@ -33,7 +41,7 @@ function RewardRow(props) {
                 {
                     categories.map((cat, index) => {
                         if (cat === "C2") {
-                            return <Reward key={index} category="C2" reward={props.reward} />
+                            return <Reward key={index} category="C2" del={del} reward={props.reward} />
                         }
 
                     })
@@ -43,7 +51,7 @@ function RewardRow(props) {
                 {
                     categories.map((cat, index) => {
                         if (cat === "C3") {
-                            return <Reward key={index} category="C3" reward={props.reward} />
+                            return <Reward key={index} category="C3" del={del} reward={props.reward} />
                         }
 
                     })
@@ -53,7 +61,7 @@ function RewardRow(props) {
                 {
                     categories.map((cat, index) => {
                         if (cat === "C4") {
-                            return <Reward key={index} category="C4" reward={props.reward} />
+                            return <Reward key={index} category="C4" del={del} reward={props.reward} />
                         }
 
                     })
@@ -63,7 +71,7 @@ function RewardRow(props) {
                 {
                     categories.map((cat, index) => {
                         if (cat === "C5") {
-                            return <Reward key={index} category="C5" reward={props.reward} />
+                            return <Reward key={index} category="C5" del={del} reward={props.reward} />
                         }
 
                     })

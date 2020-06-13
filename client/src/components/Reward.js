@@ -5,7 +5,8 @@ function Reward(props) {
     return (
 
         <div data-category={props.category} className="border my-1 p-4">
-            {props.reward}
+            <div data-category={props.category} className="float-right" onClick={props.del}> x </div>
+            <div data-category={props.category} > {props.reward} </div>
         </div>
     );
 
