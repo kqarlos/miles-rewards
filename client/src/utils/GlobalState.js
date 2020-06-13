@@ -15,9 +15,14 @@ const reducer = (state, action) => {
                 rewards: action.rewards,
             };
         case REMOVE_FROM_CATEGORY:
+            console.log("STATE!! REMOVING ", action.reward, " FROM CATEGORY ", action.category);
+            // console.log("Categories: ", state.rewards[action.reward]);
+            var rewards2 = state.rewards;
+            rewards2[action.reward] = state.rewards[action.reward].filter(cat => cat != action.category);
+            console.log(state.rewards);
             return {
                 ...state,
-                rewards: action.rewards,
+                rewards: rewards2
             };
         default:
             return state;

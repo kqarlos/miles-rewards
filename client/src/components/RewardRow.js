@@ -1,22 +1,31 @@
 import React from 'react';
 import Reward from "./Reward";
+import { useStoreContext } from "../utils/GlobalState";
+import { REMOVE_FROM_CATEGORY } from '../utils/actions';
 
 function RewardRow(props) {
+
+    const [state, dispatch] = useStoreContext();
 
     var categories = props.categories;
 
     function click(e) {
         e.preventDefault();
-        console.log("Clicked!");
-        console.log("Reward", props.reward);
-        console.log("Category", e.target.dataset.category);
+        // console.log("Clicked!");
+        // console.log("Reward", props.reward);
+        // console.log("Category", e.target.dataset.category);
     }
-    
+
     function del(e) {
         e.preventDefault();
         console.log("Delete!");
-        console.log("Reward", props.reward);
-        console.log("Category", e.target.dataset.category);
+        // console.log("Reward", props.reward);
+        // console.log("Category", e.target.dataset.category);
+        dispatch({
+            type: REMOVE_FROM_CATEGORY,
+            reward: props.reward,
+            category: e.target.dataset.category
+        });
     }
 
     return (
