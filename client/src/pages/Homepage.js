@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Container from '../components/Container';
 import RewardRow from '../components/RewardRow';
+import SaveButton from '../components/SaveButton';
 import { useStoreContext } from "../utils/GlobalState";
 
 
@@ -57,7 +58,11 @@ function Homepage() {
 
             <RewardRow reward="R5" categories={state.rewards["R5"]} />
 
-
+            <div className="row">
+                <div className="col-2">
+                    <SaveButton />
+                </div>
+            </div>
         </Container>
     );
 
