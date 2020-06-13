@@ -36,7 +36,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ## Deployed Link
 
-* [See Live Site](https:/miles-rewards.herokuapp.com/)
+* [See Live Site](https://miles-rewards.herokuapp.com/)
 
 ## Author
 
