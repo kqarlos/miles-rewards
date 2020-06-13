@@ -43,15 +43,15 @@ function Homepage() {
                 </div>
             </div>
 
-            <RewardRow reward="R1" />
+            <RewardRow reward="R1" categories={["C1", "C2"]} />
 
-            <RewardRow reward="R2" />
+            <RewardRow reward="R2" categories={["C1", "C3"]} />
 
-            <RewardRow reward="R3" />
+            <RewardRow reward="R3" categories={["C5"]} />
 
-            <RewardRow reward="R4" />
+            <RewardRow reward="R4" categories={["C4"]} />
 
-            <RewardRow reward="R5" />
+            <RewardRow reward="R5" categories={["C3"]} />
 
 
         </Container>
