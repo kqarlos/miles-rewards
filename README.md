@@ -1,5 +1,6 @@
 # Miles Rewards
 
+Web application lets users categorize rewards with a user-friendly interface.
 
 ## Available Scripts for cloned repos
 
@@ -33,10 +34,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 * [React](https://reactjs.org/)
 
 
-
 ## Deployed Link
 
-* [See Live Site]()
+* [See Live Site](https:/miles-rewards.herokuapp.com/)
 
 ## Author
 
