@@ -16,7 +16,8 @@ function RewardRow(props) {
         dispatch({
             type: ADD_TO_CATEGORY,
             reward: props.reward,
-            category: e.target.dataset.category
+            category: e.target.dataset.category,
+            newTask: true
         });
     }
 
@@ -27,7 +28,8 @@ function RewardRow(props) {
         dispatch({
             type: REMOVE_FROM_CATEGORY,
             reward: props.reward,
-            category: e.target.dataset.category
+            category: e.target.dataset.category,
+            newTask: true
         });
     }
 

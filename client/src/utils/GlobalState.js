@@ -11,43 +11,75 @@ const { Provider } = StoreContext;
 
 const reducer = (state, action) => {
     switch (action.type) {
+
         case ADD_TO_CATEGORY:
             console.log("STATE!! ADDING ", action.reward, " TO CATEGORY ", action.category);
             var rewards2 = state.rewards;
             var categories = rewards2[action.reward];
+            //If rewards categories is new, add to list of categories
             if (!categories.includes(action.category)) {
                 rewards2[action.reward].push(action.category);
             }
 
-            state.tasks.push({
-                "action": "add",
-                "reward": action.reward,
-                "category": action.category
-            });
-            state.taskIndex++;
-
-            return {
-                ...state,
-                rewards: rewards2,
-            };
+            //If task is new add to tasks stack
+            if (action.newTask) {
+                console.log("NEW TASK!! TASKS: ", state.tasks);
+                let tasks2 = state.tasks;
+                //update current task index, remove everything after it, add new task
+                state.taskIndex++;
+                tasks2.splice(state.taskIndex);
+                tasks2.push({
+                    "action": "add",
+                    "reward": action.reward,
+                    "category": action.category
+                });
+                console.log("UPDATED TASKS", tasks2);
+                return {
+                    ...state,
+                    rewards: rewards2,
+                    tasks: tasks2
+                };
+            }
+            //If task is a redo/undo don't add to tasks stack. Update Rewards
+            else {
+                return {
+                    ...state,
+                    rewards: rewards2,
+                };
+            }
 
         case REMOVE_FROM_CATEGORY:
             console.log("STATE!! REMOVING ", action.reward, " FROM CATEGORY ", action.category);
             var rewards2 = state.rewards;
+            //Remove category that matches given category
             rewards2[action.reward] = state.rewards[action.reward].filter(cat => cat !== action.category);
-            console.log(state.rewards);
 
-            state.tasks.push({
-                "action": "remove",
-                "reward": action.reward,
-                "category": action.category
-            });
-            state.taskIndex++;
-
-            return {
-                ...state,
-                rewards: rewards2
-            };
+            //If task is new add to tasks stack
+            if (action.newTask) {
+                console.log("NEW TASK!! TASKS: ", state.tasks);
+                let tasks2 = state.tasks;
+                //update current task index, remove everything after it, add new task
+                state.taskIndex++;
+                tasks2.splice(state.taskIndex);
+                tasks2.push({
+                    "action": "remove",
+                    "reward": action.reward,
+                    "category": action.category
+                });
+                console.log("UPDATED TASKS", tasks2);
+                return {
+                    ...state,
+                    rewards: rewards2,
+                    tasks: tasks2
+                };
+            }
+            //If task is a redo/undo don't add to tasks stack. Update Rewards
+            else {
+                return {
+                    ...state,
+                    rewards: rewards2,
+                };
+            }
 
         case UNDO:
             console.log("STATE!! UNDO ");
@@ -67,7 +99,6 @@ const reducer = (state, action) => {
                         reward: state.tasks[state.taskIndex]["reward"],
                         category: state.tasks[state.taskIndex]["category"]
                     });
-                    // state.taskIndex -= 2;
 
                 }
                 else if (state.tasks[state.taskIndex]["action"] === "add") {
@@ -76,18 +107,17 @@ const reducer = (state, action) => {
                         reward: state.tasks[state.taskIndex]["reward"],
                         category: state.tasks[state.taskIndex]["category"]
                     });
-                    // state.taskIndex -= 2;
                 }
-                if (state.taskIndex - 2 < -1) {
+                if (state.taskIndex === -1) {
                     return {
                         ...state,
                         taskIndex: -1
                     };
                 } else {
-                    state.taskIndex -= 2;
+                    state.taskIndex--;
                     return {
                         ...state,
-                };
+                    };
                 }
 
             }
@@ -117,9 +147,16 @@ const reducer = (state, action) => {
                         category: state.tasks[state.taskIndex + 1]["category"]
                     })
                 }
-                return {
-                    ...state
-                };
+                if (state.taskIndex === state.tasks.length - 1) {
+                    return {
+                        ...state,
+                    };
+                } else {
+                    state.taskIndex++;
+                    return {
+                        ...state,
+                    };
+                }
 
             }
 
