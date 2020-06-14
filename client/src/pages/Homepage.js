@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Container from '../components/Container';
 import RewardRow from '../components/RewardRow';
 import SaveButton from '../components/SaveButton';
+import UndoButton from '../components/UndoButton';
+import RedoButton from '../components/RedoButton';
 import { useStoreContext } from "../utils/GlobalState";
 
 
@@ -61,6 +63,12 @@ function Homepage() {
             <div className="row">
                 <div className="col-2">
                     <SaveButton />
+                </div>
+                <div className="col-2">
+                    <RedoButton />
+                </div>
+                <div className="col-2">
+                    <UndoButton />
                 </div>
             </div>
         </Container>
