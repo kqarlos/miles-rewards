@@ -55,7 +55,7 @@ const reducer = (state, action) => {
             console.log("TaskIndex", state.taskIndex);
             console.log("To UNDO", state.tasks[state.taskIndex]);
 
-            if (state.tasks.lenght < 0) {
+            if (state.taskIndex < 0) {
                 return {
                     ...state
                 };
@@ -67,7 +67,7 @@ const reducer = (state, action) => {
                         reward: state.tasks[state.taskIndex]["reward"],
                         category: state.tasks[state.taskIndex]["category"]
                     });
-                    state.taskIndex -= 2;
+                    // state.taskIndex -= 2;
 
                 }
                 else if (state.tasks[state.taskIndex]["action"] === "add") {
@@ -76,11 +76,19 @@ const reducer = (state, action) => {
                         reward: state.tasks[state.taskIndex]["reward"],
                         category: state.tasks[state.taskIndex]["category"]
                     });
-                    state.taskIndex -= 2;
+                    // state.taskIndex -= 2;
                 }
-                return {
-                    ...state
+                if (state.taskIndex - 2 < -1) {
+                    return {
+                        ...state,
+                        taskIndex: -1
+                    };
+                } else {
+                    state.taskIndex -= 2;
+                    return {
+                        ...state,
                 };
+                }
 
             }
 
@@ -89,7 +97,7 @@ const reducer = (state, action) => {
             console.log("Tasks", state.tasks);
             console.log("TaskIndex", state.taskIndex);
             console.log("To REDO", state.tasks[state.taskIndex + 1]);
-            if (state.tasks.lenght === state.taskIndex + 1) {
+            if (state.tasks.length === state.taskIndex + 1) {
                 return {
                     ...state
                 };
@@ -98,15 +106,15 @@ const reducer = (state, action) => {
                 if (state.tasks[state.taskIndex + 1]["action"] === "add") {
                     reducer(state, {
                         type: ADD_TO_CATEGORY,
-                        reward: state.tasks[state.taskIndex]["reward"],
-                        category: state.tasks[state.taskIndex]["category"]
+                        reward: state.tasks[state.taskIndex + 1]["reward"],
+                        category: state.tasks[state.taskIndex + 1]["category"]
                     })
                 }
                 else if (state.tasks[state.taskIndex + 1]["action"] === "remove") {
                     reducer(state, {
                         type: REMOVE_FROM_CATEGORY,
-                        reward: state.tasks[state.taskIndex]["reward"],
-                        category: state.tasks[state.taskIndex]["category"]
+                        reward: state.tasks[state.taskIndex + 1]["reward"],
+                        category: state.tasks[state.taskIndex + 1]["category"]
                     })
                 }
                 return {
