@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Container from '../components/Container';
 import RewardRow from '../components/RewardRow';
+import LoadButton from '../components/LoadButton';
 import SaveButton from '../components/SaveButton';
 import UndoButton from '../components/UndoButton';
 import RedoButton from '../components/RedoButton';
@@ -61,7 +62,10 @@ function Homepage() {
             <RewardRow reward="R5" categories={state.rewards["R5"]} />
 
             <div className="row mt-4">
-                <div className="col-6"></div>
+                <div className="col-4"></div>
+                <div className="col-2">
+                    <LoadButton />
+                </div>
                 <div className="col-2 text-center">
                     <SaveButton />
                 </div>

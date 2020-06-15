@@ -3,7 +3,8 @@ import {
     ADD_TO_CATEGORY,
     REMOVE_FROM_CATEGORY,
     UNDO,
-    REDO
+    REDO,
+    LOAD
 } from "./actions";
 
 const StoreContext = createContext();
@@ -168,6 +169,12 @@ const reducer = (state, action) => {
                 }
 
             }
+
+        case LOAD:
+            return {
+                ...state,
+                rewards: action.rewards
+            };
 
         default:
             return state;
