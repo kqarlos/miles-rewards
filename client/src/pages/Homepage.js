@@ -63,7 +63,7 @@ function Homepage() {
 
             <div className="row mt-4">
                 <div className="col-4"></div>
-                <div className="col-2">
+                <div className="col-2 text-center">
                     <LoadButton />
                 </div>
                 <div className="col-2 text-center">

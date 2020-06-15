@@ -15,7 +15,6 @@ function RewardRow(props) {
     function add(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Clicked!");
         //Calls the state management and sends over the reward/category cell clicked.
         //Lets the state management know that the task is new and needs to be added to the recent tasks stack.
         dispatch({
@@ -31,7 +30,6 @@ function RewardRow(props) {
     function remove(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Delete!");
         //Calls the state management and sends over the reward/category cell clicked.
         //Lets the state management know that the task is new and needs to be added to the tasks stack.
         dispatch({
@@ -44,7 +42,6 @@ function RewardRow(props) {
 
     function onDragStart(e) {
         // e.preventDefault();
-        console.log("DRAG START!");
         dispatch({
             type: DRAGGING,
             reward: props.reward
@@ -53,17 +50,14 @@ function RewardRow(props) {
 
     function onDrag(e) {
         // e.preventDefault();
-        console.log("ON DRAG!");
     }
 
     function onDragOver(e) {
         e.preventDefault();
-        // console.log("DRAG OVER!")
     }
 
     function onDrop(e) {
         // e.preventDefault();
-        console.log("DROPPING!", e);
         add(e);
         dispatch({
             type: DROPPED,

@@ -8,8 +8,7 @@ function LoadButton() {
 
     function load(e) {
         e.preventDefault();
-        console.log("Loading");
-        console.log(JSON.parse(localStorage.getItem("Rewards")));
+        console.log("Loading...");
         dispatch({
             type: LOAD,
             rewards: JSON.parse(localStorage.getItem("Rewards"))
@@ -17,7 +16,7 @@ function LoadButton() {
     }
     return (
 
-        <button onClick={(e) => load(e)}>Load</button>
+        <button className="btn btn-secondary" onClick={(e) => load(e)}>Load</button>
     );
 
 }

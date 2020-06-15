@@ -8,7 +8,6 @@ function Reward(props) {
 
     function onDragStart(e) {
         // e.preventDefault();
-        console.log("DRAG START!")
         dispatch({
             type: DRAGGING,
             reward: props.reward
@@ -17,7 +16,6 @@ function Reward(props) {
 
     function onDrag(e) {
         // e.preventDefault();
-        console.log("ON DRAG!")
     }
 
     return (

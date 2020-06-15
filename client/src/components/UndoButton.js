@@ -15,7 +15,7 @@ function UndoButton() {
     }
     return (
 
-        <button onClick={undo}>Undo</button>
+        <button className="btn btn-secondary" onClick={(e) => undo(e)}>Undo</button>
     );
 
 }

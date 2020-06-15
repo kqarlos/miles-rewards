@@ -15,7 +15,7 @@ function RedoButton() {
     }
     return (
 
-        <button onClick={(e) => redo(e)}>Redo</button>
+        <button className="btn btn-secondary" onClick={(e) => redo(e)}>Redo</button>
     );
 
 }
