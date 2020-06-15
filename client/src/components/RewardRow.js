@@ -59,9 +59,6 @@ function RewardRow(props) {
     function onDrop(e) {
         // e.preventDefault();
         add(e);
-        dispatch({
-            type: DROPPED,
-        });
     }
 
     return (
@@ -73,7 +70,7 @@ function RewardRow(props) {
                 </div>
             </div>
             <div data-category="C1" className="col-2 border-right"
-                onClick={(e) => add(e)} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
+                onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C1") {
@@ -84,7 +81,7 @@ function RewardRow(props) {
                 }
             </div>
             <div data-category="C2" className="col-2 border-right"
-                onClick={(e) => add(e)} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
+                onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C2") {
@@ -95,7 +92,7 @@ function RewardRow(props) {
                 }
             </div>
             <div data-category="C3" className="col-2 border-right"
-                onClick={(e) => add(e)} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
+                onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C3") {
@@ -106,7 +103,7 @@ function RewardRow(props) {
                 }
             </div>
             <div data-category="C4" className="col-2 border-right"
-                onClick={(e) => add(e)} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
+                onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C4") {
@@ -117,7 +114,7 @@ function RewardRow(props) {
                 }
             </div>
             <div data-category="C5" className="col-2 border-right"
-                onClick={(e) => add(e)} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
+                onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C5") {

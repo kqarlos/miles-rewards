@@ -13,17 +13,24 @@ const reducer = (state, action) => {
     switch (action.type) {
 
         case ADD_TO_CATEGORY:
-            // console.log("STATE!! ADDING ", action.reward, " TO CATEGORY ", action.category);
+            console.log("STATE!! ADDING ", action.reward, " TO CATEGORY ", action.category);
             //If the call was made by a dragged element
-            if (state.dragging) {
-                // console.log("DRAGGED: ", state.dragging)
+            if (state.dragging["reward"]) {
+                console.log("DRAGGED: ", state.dragging)
                 // return and ignore if it came from another reward row or from first column
                 if (state.dragging["reward"] !== action.reward) {
                     return {
-                        ...state
+                        ...state,
+                        dragging: {
+                            "reward": "",
+                            "category": ""
+                        }
                     };
                     //Remove incoming if dragged from another category
-                } else if (state.dragging["category"]) {
+                }
+                else if (state.dragging["category"]) {
+                    console.log("swapping");
+
                     reducer(state, {
                         type: REMOVE_FROM_CATEGORY,
                         reward: state.dragging["reward"],
@@ -55,7 +62,11 @@ const reducer = (state, action) => {
                 return {
                     ...state,
                     rewards: rewards2,
-                    tasks: tasks2
+                    tasks: tasks2,
+                    dragging : {
+                        "reward": "",
+                        "category": ""
+                    }
                 };
             }
             //If task is a redo/undo don't add to tasks stack. Update Rewards
@@ -63,11 +74,15 @@ const reducer = (state, action) => {
                 return {
                     ...state,
                     rewards: rewards2,
+                    dragging : {
+                        "reward": "",
+                        "category": ""
+                    }
                 };
             }
 
         case REMOVE_FROM_CATEGORY:
-            // console.log("STATE!! REMOVING ", action.reward, " FROM CATEGORY ", action.category);
+            console.log("STATE!! REMOVING ", action.reward, " FROM CATEGORY ", action.category);
             var rewards2 = state.rewards;
             //Remove category that matches given category
             rewards2[action.reward] = state.rewards[action.reward].filter(cat => cat !== action.category);
@@ -88,7 +103,11 @@ const reducer = (state, action) => {
                 return {
                     ...state,
                     rewards: rewards2,
-                    tasks: tasks2
+                    tasks: tasks2,
+                    dragging : {
+                        "reward": "",
+                        "category": ""
+                    }
                 };
             }
             //If task is a redo/undo don't add to tasks stack. Update Rewards
@@ -96,11 +115,15 @@ const reducer = (state, action) => {
                 return {
                     ...state,
                     rewards: rewards2,
+                    dragging : {
+                        "reward": "",
+                        "category": ""
+                    }
                 };
             }
 
         case UNDO:
-            console.log("To UNDO", state.tasks[state.taskIndex]);
+            // console.log("To UNDO", state.tasks[state.taskIndex]);
             //If there no more tasks to undo and we are at the beggining of the stack, return.
             if (state.taskIndex < 0) {
                 return {
@@ -109,8 +132,12 @@ const reducer = (state, action) => {
             }
             //If there are more tasks to undo
             else {
+                // console.log("To UNDO", state.tasks[state.taskIndex]);
+
                 //If last taks was a remove, add the category back to the reward
                 if (state.tasks[state.taskIndex]["action"] === "remove") {
+                    console.log("To UNDO", state.tasks[state.taskIndex]);
+
                     reducer(state, {
                         type: ADD_TO_CATEGORY,
                         reward: state.tasks[state.taskIndex]["reward"],
@@ -143,7 +170,7 @@ const reducer = (state, action) => {
             }
 
         case REDO:
-            // console.log("To REDO", state.tasks[state.taskIndex + 1]);
+            console.log("To REDO", state.tasks[state.taskIndex + 1]);
             //If there are no more tasks to redo and we are at the end of the stack, return.
             if (state.tasks.length === state.taskIndex + 1) {
                 return {
@@ -152,6 +179,8 @@ const reducer = (state, action) => {
             }
             //If there are more tasks to redo
             else {
+                console.log("To REDO", state.tasks[state.taskIndex + 1]);
+
                 if (state.tasks[state.taskIndex + 1]["action"] === "add") {
                     reducer(state, {
                         type: ADD_TO_CATEGORY,
@@ -194,16 +223,6 @@ const reducer = (state, action) => {
                 dragging: {
                     "reward": action.reward,
                     "category": action.category
-                }
-            };
-
-        case DROPPED:
-            // console.log("DROPPED: ", state.dragging);
-            return {
-                ...state,
-                dragging: {
-                    "reward": "",
-                    "category": ""
                 }
             };
 
