@@ -10,7 +10,8 @@ function Reward(props) {
         // e.preventDefault();
         dispatch({
             type: DRAGGING,
-            reward: props.reward
+            reward: props.reward,
+            category: props.category
         });
     }
 

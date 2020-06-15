@@ -14,13 +14,22 @@ const reducer = (state, action) => {
 
         case ADD_TO_CATEGORY:
             // console.log("STATE!! ADDING ", action.reward, " TO CATEGORY ", action.category);
-            //If the call was made by a dragged element, return and ignore if it came from another reward row.
+            //If the call was made by a dragged element
             if (state.dragging) {
-                console.log("DRAGGED: ", state.dragging)
-                if (state.dragging !== action.reward) {
+                // console.log("DRAGGED: ", state.dragging)
+                // return and ignore if it came from another reward row or from first column
+                if (state.dragging["reward"] !== action.reward) {
                     return {
                         ...state
                     };
+                    //Remove incoming if dragged from another category
+                } else if (state.dragging["category"]) {
+                    reducer(state, {
+                        type: REMOVE_FROM_CATEGORY,
+                        reward: state.dragging["reward"],
+                        category: state.dragging["category"],
+                        newTask: true
+                    });
                 }
             }
             var rewards2 = state.rewards;
@@ -32,7 +41,7 @@ const reducer = (state, action) => {
 
             //If task is new add to tasks stack
             if (action.newTask) {
-                // console.log("NEW TASK!! TASKS: ", state.tasks);
+                console.log("NEW TASK!! TASKS: ", state.tasks);
                 let tasks2 = state.tasks;
                 //update current task index, remove everything after it, add new task
                 state.taskIndex++;
@@ -42,7 +51,7 @@ const reducer = (state, action) => {
                     "reward": action.reward,
                     "category": action.category
                 });
-                console.log("UPDATED TASKS", tasks2);
+                // console.log("UPDATED TASKS", tasks2);
                 return {
                     ...state,
                     rewards: rewards2,
@@ -75,7 +84,7 @@ const reducer = (state, action) => {
                     "reward": action.reward,
                     "category": action.category
                 });
-                console.log("UPDATED TASKS", tasks2);
+                // console.log("UPDATED TASKS", tasks2);
                 return {
                     ...state,
                     rewards: rewards2,
@@ -91,7 +100,7 @@ const reducer = (state, action) => {
             }
 
         case UNDO:
-            // console.log("To UNDO", state.tasks[state.taskIndex]);
+            console.log("To UNDO", state.tasks[state.taskIndex]);
             //If there no more tasks to undo and we are at the beggining of the stack, return.
             if (state.taskIndex < 0) {
                 return {
@@ -182,14 +191,20 @@ const reducer = (state, action) => {
             // console.log("DRAGGING: ", state.dragging, action.reward);
             return {
                 ...state,
-                dragging: action.reward
+                dragging: {
+                    "reward": action.reward,
+                    "category": action.category
+                }
             };
 
         case DROPPED:
             // console.log("DROPPED: ", state.dragging);
             return {
                 ...state,
-                dragging: ""
+                dragging: {
+                    "reward": "",
+                    "category": ""
+                }
             };
 
         default:
@@ -209,7 +224,10 @@ const StoreProvider = ({ value = [], ...props }) => {
         },
         tasks: [],
         taskIndex: -1,
-        draggin: ""
+        dragging: {
+            "reward": "",
+            "category": ""
+        }
     });
     return <Provider value={[state, dispatch]} {...props} />;
 };
