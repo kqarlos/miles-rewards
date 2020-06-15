@@ -5,10 +5,12 @@ function Reward(props) {
 
     function onDragStart(e) {
         // e.preventDefault();
+        console.log("DRAG START!")
     }
 
     function onDrag(e) {
         // e.preventDefault();
+        console.log("ON DRAG!")
     }
 
     return (
