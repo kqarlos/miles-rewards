@@ -2,9 +2,8 @@ import React, { createContext, useReducer, useContext } from "react";
 import {
     ADD_TO_CATEGORY,
     REMOVE_FROM_CATEGORY,
-    UNDO,
-    REDO,
-    LOAD
+    UNDO, REDO, LOAD, DRAGGING,
+    DROPPED
 } from "./actions";
 
 const StoreContext = createContext();
@@ -15,6 +14,14 @@ const reducer = (state, action) => {
 
         case ADD_TO_CATEGORY:
             console.log("STATE!! ADDING ", action.reward, " TO CATEGORY ", action.category);
+            if (state.dragging) {
+                console.log("DRAGGED: ", state.dragging)
+                if (state.dragging !== action.reward) {
+                    return {
+                        ...state
+                    };
+                }
+            }
             var rewards2 = state.rewards;
             var categories = rewards2[action.reward];
             //If rewards categories is new, add to list of categories
@@ -118,7 +125,7 @@ const reducer = (state, action) => {
                         ...state,
                         taskIndex: -1
                     };
-                //If there are more tasks to undo, decrease the index of the task stack
+                    //If there are more tasks to undo, decrease the index of the task stack
                 } else {
                     state.taskIndex--;
                     return {
@@ -160,7 +167,7 @@ const reducer = (state, action) => {
                     return {
                         ...state,
                     };
-                //If there are more tasks to redo, increment the index of the tasks stack
+                    //If there are more tasks to redo, increment the index of the tasks stack
                 } else {
                     state.taskIndex++;
                     return {
@@ -174,6 +181,20 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 rewards: action.rewards
+            };
+
+        case DRAGGING:
+            console.log("DRAGGING: ", state.dragging, action.reward);
+            return {
+                ...state,
+                dragging: action.reward
+            };
+
+        case DROPPED:
+            console.log("DROPPED: ", state.dragging);
+            return {
+                ...state,
+                dragging: ""
             };
 
         default:
@@ -192,7 +213,8 @@ const StoreProvider = ({ value = [], ...props }) => {
             "R5": []
         },
         tasks: [],
-        taskIndex: -1
+        taskIndex: -1,
+        draggin: ""
     });
     return <Provider value={[state, dispatch]} {...props} />;
 };

@@ -3,3 +3,5 @@ export const REMOVE_FROM_CATEGORY = "REMOVE_FROM_CATEGORY";
 export const UNDO = "UNDO";
 export const REDO = "REDO";
 export const LOAD = "LOAD";
+export const DRAGGING = "DRAGGING";
+export const DROPPED = "DROPPED";

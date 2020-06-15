@@ -1,7 +1,7 @@
 import React from 'react';
 import Reward from "./Reward";
 import { useStoreContext } from "../utils/GlobalState";
-import { REMOVE_FROM_CATEGORY, ADD_TO_CATEGORY } from '../utils/actions';
+import { REMOVE_FROM_CATEGORY, ADD_TO_CATEGORY, DRAGGING, DROPPED } from '../utils/actions';
 
 //Rewards row. Renders a reward box in each category column the rewards belongs to
 function RewardRow(props) {
@@ -45,6 +45,10 @@ function RewardRow(props) {
     function onDragStart(e) {
         // e.preventDefault();
         console.log("DRAG START!");
+        dispatch({
+            type: DRAGGING,
+            reward: props.reward
+        });
     }
 
     function onDrag(e) {
@@ -61,13 +65,16 @@ function RewardRow(props) {
         // e.preventDefault();
         console.log("DROPPING!", e);
         add(e);
+        dispatch({
+            type: DROPPED,
+        });
     }
 
     return (
 
         <div className="row text-muted">
             <div className="col-2 border-right" draggable onDragStart={(e) => onDragStart(e)} onDrag={(e) => onDrag(e)}>
-                <div className="border mt-3 p-4 mx-auto text-center" style={{width: 100}}>
+                <div className="border mt-3 p-4 mx-auto text-center" style={{ width: 100 }}>
                     {props.reward}
                 </div>
             </div>
