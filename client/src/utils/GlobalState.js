@@ -86,13 +86,15 @@ const reducer = (state, action) => {
             console.log("Tasks", state.tasks);
             console.log("TaskIndex", state.taskIndex);
             console.log("To UNDO", state.tasks[state.taskIndex]);
-
+            //If there no more tasks to undo and we are at the beggining of the stack, return.
             if (state.taskIndex < 0) {
                 return {
                     ...state
                 };
             }
+            //If there are more tasks to undo
             else {
+                //If last taks was a remove, add the category back to the reward
                 if (state.tasks[state.taskIndex]["action"] === "remove") {
                     reducer(state, {
                         type: ADD_TO_CATEGORY,
@@ -101,6 +103,7 @@ const reducer = (state, action) => {
                     });
 
                 }
+                //If last taks was an add, remove the category from to the reward
                 else if (state.tasks[state.taskIndex]["action"] === "add") {
                     reducer(state, {
                         type: REMOVE_FROM_CATEGORY,
@@ -108,11 +111,13 @@ const reducer = (state, action) => {
                         category: state.tasks[state.taskIndex]["category"]
                     });
                 }
+                //If that was the last task to undo and we are back at the beggining of the stack, return.
                 if (state.taskIndex === -1) {
                     return {
                         ...state,
                         taskIndex: -1
                     };
+                //If there are more tasks to undo, decrease the index of the task stack
                 } else {
                     state.taskIndex--;
                     return {
@@ -127,11 +132,13 @@ const reducer = (state, action) => {
             console.log("Tasks", state.tasks);
             console.log("TaskIndex", state.taskIndex);
             console.log("To REDO", state.tasks[state.taskIndex + 1]);
+            //If there are no more tasks to redo and we are at the end of the stack, return.
             if (state.tasks.length === state.taskIndex + 1) {
                 return {
                     ...state
                 };
             }
+            //If there are more tasks to redo
             else {
                 if (state.tasks[state.taskIndex + 1]["action"] === "add") {
                     reducer(state, {
@@ -147,10 +154,12 @@ const reducer = (state, action) => {
                         category: state.tasks[state.taskIndex + 1]["category"]
                     })
                 }
+                //If that was the last task to redo and we a re at the end of the stak, return
                 if (state.taskIndex === state.tasks.length - 1) {
                     return {
                         ...state,
                     };
+                //If there are more tasks to redo, increment the index of the tasks stack
                 } else {
                     state.taskIndex++;
                     return {
@@ -165,7 +174,7 @@ const reducer = (state, action) => {
     }
 };
 
-
+//Initialize the state with rewards with no categories and an empty tasks stack.
 const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useReducer(reducer, {
         rewards: {
