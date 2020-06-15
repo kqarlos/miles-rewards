@@ -42,15 +42,32 @@ function RewardRow(props) {
         });
     }
 
+    function onDragStart(e) {
+        // e.preventDefault();
+    }
+
+    function onDrag(e) {
+        // e.preventDefault();
+    }
+
+    function onDragOver(e) {
+        // e.preventDefault();
+    }
+
+    function onDrop(e) {
+        // e.preventDefault();
+    }
+
     return (
 
         <div className="row">
-            <div className="col-2 border-right">
+            <div className="col-2 border-right" draggable onDragStart={(e) => onDragStart(e)} onDrag={(e) => onDrag(e)}>
                 <div className="border my-1 p-4">
                     {props.reward}
                 </div>
             </div>
-            <div onClick={add} data-category="C1" className="col-2 border-right">
+            <div data-category="C1" className="col-2 border-right"
+                onClick={add} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C1") {
@@ -60,7 +77,8 @@ function RewardRow(props) {
                     })
                 }
             </div>
-            <div onClick={add} data-category="C2" className="col-2 border-right">
+            <div data-category="C2" className="col-2 border-right"
+                onClick={add} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C2") {
@@ -70,7 +88,8 @@ function RewardRow(props) {
                     })
                 }
             </div>
-            <div onClick={add} data-category="C3" className="col-2 border-right">
+            <div data-category="C3" className="col-2 border-right"
+                onClick={add} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C3") {
@@ -80,7 +99,8 @@ function RewardRow(props) {
                     })
                 }
             </div>
-            <div onClick={add} data-category="C4" className="col-2 border-right">
+            <div data-category="C4" className="col-2 border-right"
+                onClick={add} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C4") {
@@ -90,7 +110,8 @@ function RewardRow(props) {
                     })
                 }
             </div>
-            <div onClick={add} data-category="C5" className="col-2">
+            <div data-category="C5" className="col-2"
+                onClick={add} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {
                         if (cat === "C5") {
