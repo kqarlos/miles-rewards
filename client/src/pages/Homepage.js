@@ -20,32 +20,32 @@ function Homepage() {
 
         <Container>
 
-            <div className="row">
-                <div className="col-2 border-bottom border-right">
+            <div className="row text-muted">
+                <div className="col-2 border-bottom border-right pb-2 text-center">
                     Rewards
                 </div>
-                <div className="col-10 border-bottom">
+                <div className="col-10 border-bottom border-right text-center pb-2">
                     Categories
                 </div>
             </div>
 
-            <div className="row ">
+            <div className="row text-muted">
                 <div className="col-2 border-right">
 
                 </div>
-                <div className="col-2 border-bottom border-right">
+                <div className="col-2 border-bottom border-right py-3 text-center">
                     C1
                 </div>
-                <div className="col-2 border-bottom border-right">
+                <div className="col-2 border-bottom border-right py-3 text-center">
                     C2
                 </div>
-                <div className="col-2 border-bottom border-right">
+                <div className="col-2 border-bottom border-right py-3 text-center">
                     C3
                 </div>
-                <div className="col-2 border-bottom border-right">
+                <div className="col-2 border-bottom border-right py-3 text-center">
                     C4
                 </div>
-                <div className="col-2 border-bottom">
+                <div className="col-2 border-bottom border-right py-3 text-center">
                     C5
                 </div>
             </div>
@@ -60,16 +60,18 @@ function Homepage() {
 
             <RewardRow reward="R5" categories={state.rewards["R5"]} />
 
-            <div className="row">
-                <div className="col-2">
+            <div className="row mt-4">
+                <div className="col-6"></div>
+                <div className="col-2 text-center">
                     <SaveButton />
                 </div>
-                <div className="col-2">
+                <div className="col-2 text-center">
                     <RedoButton />
                 </div>
-                <div className="col-2">
+                <div className="col-2 text-center">
                     <UndoButton />
                 </div>
+
             </div>
         </Container>
     );

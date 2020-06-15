@@ -65,9 +65,9 @@ function RewardRow(props) {
 
     return (
 
-        <div className="row">
+        <div className="row text-muted">
             <div className="col-2 border-right" draggable onDragStart={(e) => onDragStart(e)} onDrag={(e) => onDrag(e)}>
-                <div className="border my-1 p-4">
+                <div className="border mt-3 p-4 mx-auto text-center" style={{width: 100}}>
                     {props.reward}
                 </div>
             </div>
@@ -115,7 +115,7 @@ function RewardRow(props) {
                     })
                 }
             </div>
-            <div data-category="C5" className="col-2"
+            <div data-category="C5" className="col-2 border-right"
                 onClick={(e) => add(e)} onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
                 {
                     categories.map((cat, index) => {

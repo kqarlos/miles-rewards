@@ -15,10 +15,10 @@ function Reward(props) {
 
     return (
 
-        <div className="border my-1 p-4" data-category={props.category} draggable
+        <div className="border mx-auto mt-3 p-4" style={{width: 100}} data-category={props.category} draggable
             onDragStart={(e) => onDragStart(e)} onDrag={(e) => onDrag(e)}>
             <div data-category={props.category} className="float-right" onClick={props.remove}> x </div>
-            <div data-category={props.category} > {props.reward} </div>
+            <div data-category={props.category} className="text-center"> {props.reward} </div>
         </div>
     );
 
