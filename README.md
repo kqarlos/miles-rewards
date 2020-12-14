@@ -26,7 +26,7 @@ Web application lets users categorize rewards with a user-friendly interface.
 * [Installation](#installation)
 * [Usage](#usage)
     * [Screenshots](#screenshots)
-    * [Snippets](#snippets)
+    <!-- * [Snippets](#snippets) -->
 * [Credits](#credits)
 * [License](#license)
 
@@ -63,6 +63,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ![Site](client/public/live.gif)
 
+<!-- ### Snippets -->
 
 ## Credits 
 
